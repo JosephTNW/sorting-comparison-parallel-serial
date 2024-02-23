@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "sortingAlgos/bubbleSort.h"
 #include "sortingAlgos/mergeSort.h"
+#include "sortingAlgos/insertionSort.h"
 #include "utils/arrayUtils.h"
 
 using namespace std;
@@ -30,18 +31,33 @@ void runMergeSort(vector<int>& arr) {
 
     double start, end;
 
-    // Serial Merge Sort
     start = omp_get_wtime();
     mergeSortSerial(arrCopy, 0, arrCopy.size() - 1);
     end = omp_get_wtime();
     cout << "Serial Merge Sort: " << end - start << " seconds." << endl;
 
-    // Parallel Merge Sort
     start = omp_get_wtime();
     mergeSortParallel(arr, 0, arr.size() - 1);
     end = omp_get_wtime();
     cout << "Parallel Merge Sort: " << end - start << " seconds." << endl;
 }
+
+void runInsertionSort(vector<int>& arr) {
+    vector<int> arrCopy = arr;
+
+    double start, end;
+
+    start = omp_get_wtime();
+    insertionSortSerial(arrCopy);
+    end = omp_get_wtime();
+    cout << "Serial Insertion Sort: " << end - start << " seconds." << endl;
+
+    start = omp_get_wtime();
+    insertionSortParallel(arr);
+    end = omp_get_wtime();
+    cout << "Parallel Insertion Sort: " << end - start << " seconds." << endl;
+}
+
 
 int main()
 {
@@ -81,15 +97,13 @@ int main()
             break;
         case 3:
             cout << "You have selected Quick Sort." << endl;
-            // Call your quick sort function here with the appropriate parameters
             break;
         case 4:
             cout << "You have selected Insertion Sort." << endl;
-            // Call your insertion sort function here with the appropriate parameters
+            runInsertionSort(arr);
             break;
         case 5:
             cout << "You have selected Selection Sort." << endl;
-            // Call your selection sort function here with the appropriate parameters
             break;
         case 6:
             cout << "Exiting program." << endl;
@@ -100,7 +114,6 @@ int main()
         }
     } while (running);
 
-    // After the loop, you might want to display the sorted array or perform additional actions
     printArray(arr);
 
     return 0;
