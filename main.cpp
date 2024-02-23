@@ -5,34 +5,9 @@
 #include <algorithm>
 #include "sortingAlgos/bubbleSort.h"
 #include "sortingAlgos/mergeSort.h"
+#include "utils/arrayUtils.h"
+
 using namespace std;
-
-vector<int> generateArray(int n)
-{
-    vector<int> arr(n);
-    for (int i = 0; i < n; ++i)
-    {
-        arr[i] = i + 1;
-    }
-    return arr;
-}
-
-vector<int> shuffleArray(vector<int> &arr)
-{
-    random_device rd;
-    mt19937 g(rd());
-    shuffle(arr.begin(), arr.end(), g);
-    return arr;
-}
-
-void printArray(vector<int> &arr)
-{
-    for (int i = 0; i < arr.size(); ++i)
-    {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
-}
 
 void runBubbleSort(vector<int> &arr)
 {

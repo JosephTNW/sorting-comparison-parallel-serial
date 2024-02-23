@@ -3,12 +3,19 @@
 #include <omp.h>
 using namespace std;
 
+/**
+ * Merges two subarrays of the given array.
+ * 
+ * @param arr The array to be sorted.
+ * @param l The starting index of the first subarray.
+ * @param m The ending index of the first subarray.
+ * @param r The ending index of the second subarray.
+ */
 void merge(vector<int>& arr, int l, int m, int r) {
     int n1 = m - l + 1;
     int n2 = r - m;
 
-    vector<int> left(n1);
-    vector<int> right(n2);
+    vector<int> left(n1), right(n2);
 
     for (int i = 0; i < n1; i++)
         left[i] = arr[l + i];
@@ -43,6 +50,13 @@ void merge(vector<int>& arr, int l, int m, int r) {
     }
 }
 
+/**
+ * Sorts the given vector using the merge sort algorithm in a serial manner.
+ * 
+ * @param arr The vector to be sorted.
+ * @param l The starting index of the subarray to be sorted.
+ * @param r The ending index of the subarray to be sorted.
+ */
 void mergeSortSerial(vector<int>& arr, int l, int r) {
     if (l < r) {
         int m = l + (r - l) / 2;
@@ -54,6 +68,16 @@ void mergeSortSerial(vector<int>& arr, int l, int r) {
     }
 }
 
+/**
+ * Sorts a vector of integers using the parallel implementation of the merge sort algorithm.
+ * 
+ * @param arr The vector of integers to be sorted.
+ * @param l The starting index of the subarray to be sorted.
+ * @param r The ending index of the subarray to be sorted.
+ * 
+ * @note The function assumes that the vector is not empty.
+ *       The function uses OpenMP directives to parallelize the sorting process, so it requires OpenMP support.
+ */
 void mergeSortParallel(vector<int>& arr, int l, int r) {
     if (l < r) {
         int m = l + (r - l) / 2;
