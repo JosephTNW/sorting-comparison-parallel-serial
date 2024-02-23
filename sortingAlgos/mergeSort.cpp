@@ -1,14 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <omp.h>
-#include "mergeSort.h"
+using namespace std;
 
-void merge(std::vector<int>& arr, int l, int m, int r) {
+void merge(vector<int>& arr, int l, int m, int r) {
     int n1 = m - l + 1;
     int n2 = r - m;
 
-    std::vector<int> left(n1);
-    std::vector<int> right(n2);
+    vector<int> left(n1);
+    vector<int> right(n2);
 
     for (int i = 0; i < n1; i++)
         left[i] = arr[l + i];
@@ -43,7 +43,7 @@ void merge(std::vector<int>& arr, int l, int m, int r) {
     }
 }
 
-void mergeSortSerial(std::vector<int>& arr, int l, int r) {
+void mergeSortSerial(vector<int>& arr, int l, int r) {
     if (l < r) {
         int m = l + (r - l) / 2;
 
@@ -54,16 +54,16 @@ void mergeSortSerial(std::vector<int>& arr, int l, int r) {
     }
 }
 
-void mergeSortParallel(std::vector<int>& arr, int l, int r) {
+void mergeSortParallel(vector<int>& arr, int l, int r) {
     if (l < r) {
         int m = l + (r - l) / 2;
 
-#pragma omp parallel sections
+        #pragma omp parallel sections
         {
-#pragma omp section
+            #pragma omp section
             mergeSortParallel(arr, l, m);
 
-#pragma omp section
+            #pragma omp section
             mergeSortParallel(arr, m + 1, r);
         }
 
