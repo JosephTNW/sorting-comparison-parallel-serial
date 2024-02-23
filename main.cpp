@@ -7,7 +7,6 @@
 #include "sortingAlgos/mergeSort.h"
 using namespace std;
 
-
 vector<int> generateArray(int n)
 {
     vector<int> arr(n);
