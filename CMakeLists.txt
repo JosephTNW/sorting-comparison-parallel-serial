@@ -12,4 +12,8 @@ add_executable(MidTermProject__ArraySortingVisualization_
         sortingAlgos/mergeSort.h
         main.cpp
         sortingAlgos/mergeSort.cpp
+        sortingAlgos/quickSort.cpp
+        sortingAlgos/quickSort.h
+        sortingAlgos/bucketSort.cpp
+        sortingAlgos/bucketSort.h
         utils/arrayUtils.cpp)
