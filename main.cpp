@@ -6,6 +6,8 @@
 #include "sortingAlgos/bubbleSort.h"
 #include "sortingAlgos/mergeSort.h"
 #include "sortingAlgos/insertionSort.h"
+#include "sortingAlgos/quickSort.h"
+#include "sortingAlgos/bucketSort.h"
 #include "utils/arrayUtils.h"
 
 using namespace std;
@@ -58,6 +60,37 @@ void runInsertionSort(vector<int>& arr) {
     cout << "Parallel Insertion Sort: " << end - start << " seconds." << endl;
 }
 
+void runQuickSort(vector<int>& arr) {
+    vector<int> arrCopy = arr;
+
+    double start, end;
+
+    start = omp_get_wtime();
+    quickSortSerial(arrCopy, 0, arrCopy.size() - 1);
+    end = omp_get_wtime();
+    cout << "Serial Quick Sort: " << end - start << " seconds." << endl;
+
+    start = omp_get_wtime();
+    quickSortParallel(arr, 0, arr.size() - 1);
+    end = omp_get_wtime();
+    cout << "Parallel Quick Sort: " << end - start << " seconds." << endl;
+}
+
+void runBucketSort(vector<int>& arr, int num_buckets) {
+    vector<int> arrCopy = arr;
+
+    double start, end;
+
+    start = omp_get_wtime();
+    bucketSortSerial(arrCopy, num_buckets);
+    end = omp_get_wtime();
+    cout << "Serial Bucket Sort: " << end - start << " seconds." << endl;
+
+    start = omp_get_wtime();
+    bucketSortParallel(arr, num_buckets);
+    end = omp_get_wtime();
+    cout << "Parallel Bucket Sort: " << end - start << " seconds." << endl;
+}
 
 int main()
 {
